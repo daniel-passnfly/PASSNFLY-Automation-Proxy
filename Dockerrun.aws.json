@@ -1,0 +1,22 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "proxy",
+	    "essential": true,
+            "image": "luminati/luminati-proxy",
+   	    "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 22999,
+                    "hostPort": 22999
+                },
+                {
+                    "containerPort": 24000,
+                    "hostPort": 24000
+                }
+            ]
+        }
+    ],
+    "family": "",
+    "volumes": []
+}

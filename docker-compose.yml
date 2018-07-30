@@ -1,0 +1,10 @@
+# To execute this docker-compose yml file use docker-compose -f <file_name> up
+# Add the "-d" flag at the end for deattached execution
+# convert for AWS Elastic Beanstalk Multi Container: cat docker-compose.yml | container-transform > Dockerrun.aws.json
+version: "2"
+services:
+  proxy:
+    image: luminati/luminati-proxy
+    ports:
+      - "22999:22999"
+      - "24000:24000"
