@@ -6,6 +6,13 @@
 	    "essential": true,
             "image": "luminati/luminati-proxy",
    	    "memory": 512,
+	    "command": [
+		"luminati",
+		"--www_whitelist_ips",
+		"172.17.0.1",
+		"--ssl",
+		"true"
+	      ],
             "portMappings": [
                 {
                     "containerPort": 22999,
