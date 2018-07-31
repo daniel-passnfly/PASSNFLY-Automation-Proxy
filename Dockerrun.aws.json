@@ -1,30 +1,43 @@
 {
-    "AWSEBDockerrunVersion": 2,
-    "containerDefinitions": [
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "lpm",
+      "host": {
+        "sourcePath": "/var/app/current"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "proxy",
+      "essential": true,
+      "image": "luminati/luminati-proxy",
+      "memory": 512,
+      "command": [
+        "luminati",
+        "--www_whitelist_ips",
+        "0.0.0.0/0",
+        "--ssl",
+        "true"
+      ],
+      "portMappings": [
         {
-            "name": "proxy",
-	    "essential": true,
-            "image": "luminati/luminati-proxy",
-   	    "memory": 512,
-	    "command": [
-		"luminati",
-		"--www_whitelist_ips",
-		"0.0.0.0/0",
-		"--ssl",
-		"true"
-	      ],
-            "portMappings": [
-                {
-                    "containerPort": 22999,
-                    "hostPort": 22999
-                },
-                {
-                    "containerPort": 24000,
-                    "hostPort": 24000
-                }
-            ]
+          "containerPort": 22999,
+          "hostPort": 22999
+        },
+        {
+          "containerPort": 24000,
+          "hostPort": 24000
         }
-    ],
-    "family": "",
-    "volumes": []
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "lpm",
+          "containerPath": "/root"
+        }
+      ]
+    }
+  ],
+  "family": ""
 }
